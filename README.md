@@ -4,7 +4,7 @@
 ## Les codes sont triés par cours/semaine/jour ou correction/semaine/jour
 
 ### Cours
-[a link](week1/)
+[Semaine 1](week1/)
 
 ### Correction
 
