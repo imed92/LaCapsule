@@ -60,7 +60,7 @@ Puis on envoie cette branche sur le serveur distant
 git push --set-upstream origin prod
 ```
 On check via gitlab et :
-![](/push_prod.png "Titre de l'image")
+![](./push_prod.png "Titre de l'image")
 
 Une fois que c'est fait on rebascule sur main
 ```bash
@@ -76,16 +76,16 @@ Pour remplir sa base de données, il faut la remplir avec le contenu du fichier 
 
 Pour mettre en place la connexion depuis MongoDB Compass, il faut renseigner l'url avec le password de son cluster MongoDB 
 Ensuite, on créer la base de données nommé lacpasule, puis une collection qui sera dans ma bdd lacapsule. Cette collection sera nommée trips :
-![](/mongopomapss.png "Titre de l'image")
+![](./mongopomapss.png "Titre de l'image")
 
 Une fois la base de données et la collection trips créées, on importe le fichier json trips.json pour remplir notre collections trips avec les données du fichier trips.json.
 
-![](/import_trips.png "Titre de l'image")
-![](/importtrips.png "Titre de l'image")
+![](./import_trips.png "Titre de l'image")
+![](./importtrips.png "Titre de l'image")
 
 Et voilà, trips.json a bien été importé dans notre collection trips.
 Notre base de données lacapsule est bien hebergée sur un cluster et dans cette base de données on a maintenant une collection nommée trips avec ces données :
 
-![](/donnees.png "Titre de l'image")
+![](./donnees.png "Titre de l'image")
 
 ## 3. Tests Cypress
