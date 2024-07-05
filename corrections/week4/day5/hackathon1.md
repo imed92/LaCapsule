@@ -34,9 +34,9 @@ git push
 ``` 
 Maintenant on check si c'est bien push sur Gitlab
 
-![](/Frontendgitlab.png "Titre de l'image")
+![](./Frontendgitlab.png "Titre de l'image")
 
-![](/Backendgitlab.png "Titre de l'image")
+![](./Backendgitlab.png "Titre de l'image")
 
 Et voilà, c'est bien push sur nos repos distant
 
