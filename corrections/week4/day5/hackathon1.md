@@ -88,4 +88,34 @@ Notre base de données lacapsule est bien hebergée sur un cluster et dans cette
 
 ![](./donnees.png "Titre de l'image")
 
+### Lancement du Backend
+
+On va dans le repository de backend 
+```bash
+cd backend
+```
+Puis on va lancer notre serveur via node
+On installe d'abord les dépendance via npm
+```bash
+npm install
+```
+
+Puis on configure notre variable d'environnement CONNECTION_STRING qui va nous permettre de configurer notre connexion vers notre cluster MongoDB
+Dans le repository backend on créer un fichier .env et dedans on ajoute cette ligne :
+```bash
+# On va recopier cette ligne dans le fichier .env sauf qu'a la palce de <password> on met notre mdp mongoAtlas et à la place de <nom_de_la_bdd> on met le nom de la base de données qu'on a créée
+CONNECTION_STRING=mongodb+srv://imed7:<password>@cluster0.zpnua1d.mongodb.net/<nom_de_la_bdd>?retryWrites=true&w=majority&appName=Cluster0
+```
+
+Un fois que c'est fait, on peut lancer notre serveur node :
+```bash
+npm start
+```
+On va sur localhost:3000 et :
+
+![](./backend_localhost.png "Titre de l'image")
+
+
 ## 3. Tests Cypress
+
+On va maintenant mettre en place nos teste Cypress sur le backend.
