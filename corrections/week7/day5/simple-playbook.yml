@@ -1,0 +1,5 @@
+- name: Mon playbook
+  hosts: linode
+  tasks:
+  - name: Pinger mon serveur aws
+    ansible.builtin.ping:

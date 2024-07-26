@@ -1,0 +1,54 @@
+- hosts: linode
+  tasks:
+  - name: "Créer un user nginx"
+    # Ci dessous je donne les privileges sudo pour cette tache
+    become: true
+    user:
+      name: nginx
+      password: "{{ 'ihateapache' | password_hash('sha512') }}"
+      home: /home/nginx
+      shell: /bin/bash # Modification du terminal par défaut (bash) pour l’utilisateur "nginx"
+  - name: "Ajout de nginx au groupe sudo"
+    become: true
+    lineinfile:
+      path: /etc/sudoers # Le chemin du fichier qu'on veut modifier
+      state: present # Ici on s'assure que la ligne voulue est bien présente
+      regexp: '^%nginx' # Ici je cherche la ligne qui commence par %nginx
+      line: '%nginx ALL=(ALL) NOPASSWD: ALL' # La ligne que je veux ajouter/modifier
+      validate: visudo -cf %s # On save le fichier /etc/sudoers
+  - name: "Désactivation de la possibilité de se connecter avec un mot de passe via SSH"
+    become: true
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?PasswordAuthentication'
+      line: 'PasswordAuthentication no'
+      state: present
+      validate: /usr/sbin/sshd -t
+  - name: "Créer le répertoire .ssh pour l'utilisateur nginx"
+    become: true
+    file:
+      path: /home/nginx/.ssh # ON CRÉER LE REPERTOIRE .ssh pour l'user nginx
+      state: directory
+      mode: '0700'
+      owner: nginx
+      group: nginx
+  - name: "Ajouter la clé publique à /home/nginx/.ssh/authorized_keys"
+    become: true
+    authorized_key:
+      user: nginx
+      state: present
+      key: "{{ lookup('file', '~/.ssh/test-ansible.pub') }}" # on recopie le contenu de la clé test-ansible.pub dans le fichier /home/nginx/.ssh/authorized_key
+  - name: "Mettre à jour les paquets et installer nginx"
+    become: true
+    apt:
+      update_cache: yes
+      # upgrade: yes
+      name: nginx
+      state: latest
+  - name: "Démarrer le service nginx"
+    become: true
+    service:
+      name: nginx
+      state: started
+
+
